@@ -24,7 +24,7 @@
       <div class="col-md-12">
         <vuestic-widget class="chart-widget" :headerText="'Agent Profile'">
           <div class="d-flex justify-content-center align-items-center" style="margin-top: 30px">
-            <vuestic-profile-card :name="agent_name" :cation="'172.9.0.124'" photoSource="http://i.imgur.com/NLrdqsk.png"
+            <vuestic-profile-card :name="agent_name" :cation="'172.9.0.124'" photoSource="https://i.imgur.com/2CmhHsQ.png"
                                   :social="{}">
             </vuestic-profile-card>
           </div>

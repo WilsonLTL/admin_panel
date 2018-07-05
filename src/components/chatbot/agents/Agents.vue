@@ -20,7 +20,7 @@
       <div class="col-md-4" v-for="item in cn_result.agent">
         <vuestic-widget class="chart-widget" :headerText="'Agent Profile'">
           <div class="d-flex justify-content-center align-items-center" style="margin-top: 30px">
-            <vuestic-profile-card :name=item.agent_name :location="'172.9.0.124'" photoSource="http://i.imgur.com/NLrdqsk.png"
+            <vuestic-profile-card :name=item.agent_name :location="'172.9.0.124'" photoSource="https://i.imgur.com/2CmhHsQ.png"
                                   :social="{}">
             </vuestic-profile-card>
           </div>
@@ -39,7 +39,7 @@
       <div class="col-md-4" v-for="item in en_result.agent">
         <vuestic-widget class="chart-widget" :headerText="'Agent Profile'">
           <div class="d-flex justify-content-center align-items-center" style="margin-top: 30px">
-            <vuestic-profile-card :name=item.agent_name :location="'172.9.0.124'" photoSource="http://i.imgur.com/NLrdqsk.png"
+            <vuestic-profile-card :name=item.agent_name :location="'172.9.0.124'" photoSource="https://i.imgur.com/2CmhHsQ.png"
                                   :social="{}">
             </vuestic-profile-card>
           </div>
