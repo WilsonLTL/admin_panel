@@ -10,3 +10,9 @@ Run dev by enter 'npm run dev'
 
 Link of the website: <br >
 http://ec2-54-169-157-173.ap-southeast-1.compute.amazonaws.com
+
+Link of db api: <br >
+http://ec2-13-229-73-34.ap-southeast-1.compute.amazonaws.com:5000
+
+Link of firebase link: <br >
+https://voice-kit-v2-demo.firebaseio.com
