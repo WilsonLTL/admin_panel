@@ -8,3 +8,5 @@ Run dev by enter 'npm run dev'
   </a>
 </p>
 
+Link of the website: <br >
+http://ec2-54-169-157-173.ap-southeast-1.compute.amazonaws.com

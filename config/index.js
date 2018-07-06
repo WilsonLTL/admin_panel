@@ -1,5 +1,9 @@
 'use strict'
 const path = require('path')
+const fs = require('fs');
+let config = fs.readFileSync('./config.json');
+let data = JSON.parse(config);
+console.log(data);
 
 module.exports = {
   build: {
@@ -29,7 +33,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target: 'http://ec2-13-229-73-34.ap-southeast-1.compute.amazonaws.com:5000',
+        target: data['api_url'],
         changeOrigin: true,
         pathRewrite: {
           '^/api': ''
