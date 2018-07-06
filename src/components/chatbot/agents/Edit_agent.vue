@@ -28,6 +28,10 @@
                                   :social="{}">
             </vuestic-profile-card>
           </div>
+          <button class="btn btn-primary btn-micro" v-on:click="edit_agent_name">
+            <span aria-hidden="true" class="fa fa-edit" style="font-size: 17px;"></span>
+            {{'Edit agent name'}}
+          </button>
         </vuestic-widget>
       </div>
 
@@ -123,7 +127,7 @@
       },
       add_intent: function () {
         let _this = this
-        let record = window.prompt('Please enter a new intent name')
+        let record = window.prompt('Please enter a new intent name:')
         if (record === null) {
           alert('Please enter a name!!')
         } else {
@@ -135,9 +139,30 @@
           _this.items.push(intent)
           this.$router.push({name: 'modify_intent', params: {items: this.$route.params.item, item: intent, data: this.$route.params.data, lang: _this.lang}})
         }
+      },
+      edit_agent_name: function () {
+        let _this = this
+        let url = ''
+        let name = window.prompt('Please enter a new agent name:')
+        if (name !== null) {
+          _this.agent_name = name
+          if (_this.lang === 'cn') {
+            url = '/api/update_agent'
+          } else {
+            url = '/api/update_agent_en'
+          }
+          axios.post(url, _this.data).then(function (res) {
+            console.log(res.data)
+          }, function (error) {
+            console.log(error)
+          })
+        } else {
+          alert('Please enter a valid name!')
+        }
       }
     }
   }
+
 </script>
 
 <style scoped>

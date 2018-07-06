@@ -16,7 +16,6 @@
     </vuestic-alert>
 
     <div class="row">
-
       <div class="col-md-4" v-for="item in cn_result.agent">
         <vuestic-widget class="chart-widget" :headerText="'Agent Profile'">
           <div class="d-flex justify-content-center align-items-center" style="margin-top: 30px">
@@ -29,13 +28,12 @@
               <span aria-hidden="true" class="fa fa-edit">{{'Edit'}}</span>
             </button>
             <pre>&#9;</pre>
-            <button class="btn btn-dark btn-micro" v-on:click="delete_agent(item)">
+            <button class="btn btn-dark btn-micro" v-on:click="delete_agent(item,'cn')">
               <span aria-hidden="true" class="fa fa-trash">{{'Delete'}}</span>
             </button>
           </div>
         </vuestic-widget>
       </div>
-
       <div class="col-md-4" v-for="item in en_result.agent">
         <vuestic-widget class="chart-widget" :headerText="'Agent Profile'">
           <div class="d-flex justify-content-center align-items-center" style="margin-top: 30px">
@@ -48,13 +46,12 @@
               <span aria-hidden="true" class="fa fa-edit">{{'Edit'}}</span>
             </button>
             <pre>&#9;</pre>
-            <button class="btn btn-dark btn-micro" v-on:click="delete_agent(item)">
+            <button class="btn btn-dark btn-micro" v-on:click="delete_agent(item,'en')">
               <span aria-hidden="true" class="fa fa-trash">{{'Delete'}}</span>
             </button>
           </div>
         </vuestic-widget>
       </div>
-
     </div>
   </div>
 
@@ -106,7 +103,7 @@
           alert('Please enter a name!!')
         } else {
           let data = {
-            'agent_id': 1290378912,
+            'agent_id': makeid(),
             'agent_name': name,
             'intents': []
           }
@@ -116,7 +113,7 @@
             this.$router.push({name: 'edit_agent', params: {data: _this.cn_result, item: data, lang: 'cn'}})
           } else if (type === 'english') {
             _this.en_result.agent.push(data)
-            this.$router.push({name: 'edit_agent', params: {data: _this.cn_result, item: data, lang: 'en'}})
+            this.$router.push({name: 'edit_agent', params: {data: _this.en_result, item: data, lang: 'en'}})
           } else {
             alert('Please select a valid type')
           }
@@ -132,15 +129,44 @@
         console.log(item)
         this.$router.push({name: 'edit_agent', params: {data: _this.en_result, item: item, lang: 'en'}})
       },
-      delete_agent: function (item) {
+      delete_agent: function (item, lang) {
         if (confirm('Are you sure to delete this agent?')) {
-          let index = this.items.indexOf(item)
-          this.items.splice(index, 1)
+          if (lang === 'cn') {
+            deletedbagent(this.cn_result['system_id'], item['agent_id'], 'cn')
+            let index = this.cn_result['agent'].indexOf(item)
+            this.cn_result['agent'].splice(index, 1)
+          } else {
+            deletedbagent(this.en_result['system_id'], item['agent_id'], 'en')
+            let index = this.en_result['agent'].indexOf(item)
+            this.en_result['agent'].splice(index, 1)
+          }
         }
       }
     }
   }
+  function makeid () {
+    let text = ''
+    let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
 
+    for (let i = 0; i < 5; i++) {
+      text += possible.charAt(Math.floor(Math.random() * possible.length))
+    }
+    return text
+  }
+
+  function deletedbagent (systemid, agentid, lang) {
+    let url = ''
+    if (lang === 'cn') {
+      url = '/api/delete_agent'
+    } else {
+      url = '/api/delete_agent_en'
+    }
+    axios.post(url, {system_id: systemid, agent_id: agentid}).then(function (res) {
+      console.log(res.data)
+    }, function (error) {
+      console.log(error)
+    })
+  }
 </script>
 
 <style lang="scss" scoped>

@@ -111,7 +111,7 @@
         let _this = this
         if (event) {
           let record = window.prompt('Please enter a new phrase', '')
-          if (record === null) {
+          if (record === null || record === '') {
             alert('Please enter a valid sentence!')
           } else {
             _this.training_phrases.push(record)
@@ -122,7 +122,7 @@
         let _this = this
         if (event) {
           let record = window.prompt('Please enter a new phrase', '')
-          if (record === null) {
+          if (record === null || record === '') {
             alert('Please enter a valid sentence!')
           } else {
             _this.response_text.push(record)
