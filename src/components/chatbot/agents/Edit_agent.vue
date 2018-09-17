@@ -132,7 +132,7 @@
     mounted: function () {
       let _this = this
       let successmsg = document.getElementById('success')
-      let infomsg = document.getElementById('info')
+      // let infomsg = document.getElementById('info')
       let warningmsg = document.getElementById('warning')
       let dangermsg = document.getElementById('danger')
 
@@ -156,8 +156,7 @@
         console.log(error)
       })
 
-    },
-    methods: {
+    },methods: {
       delete_intent: function (row) {
         if (confirm('Are you sure to delete this intent?')) {
           let index = this.items.indexOf(row)
