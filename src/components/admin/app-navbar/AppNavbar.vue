@@ -7,7 +7,7 @@
     <notification-dropdown/>
     <language-dropdown/>
     <profile-dropdown>
-      <img src="http://i.imgur.com/nfa5itq.png"/>
+      <img src="https://i.imgur.com/2CmhHsQ.png"/>
     </profile-dropdown>
   </vuestic-navbar>
 

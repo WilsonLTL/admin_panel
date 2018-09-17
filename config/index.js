@@ -1,9 +1,6 @@
 'use strict'
 const path = require('path')
-const fs = require('fs');
-let config = fs.readFileSync('./config.json');
-let data = JSON.parse(config);
-console.log(data);
+const data = require('./config.json')
 
 module.exports = {
   build: {

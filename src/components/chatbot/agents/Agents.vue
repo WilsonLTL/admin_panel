@@ -8,46 +8,37 @@
       </button>
     </div>
 
-
-    <vuestic-alert type="success" :withCloseBtn="true">
-      <span class="badge badge-pill badge-success">{{'notificationsPage.alerts.success' | translate}}</span>
-      {{'notificationsPage.alerts.successMessage' | translate}}
-      <i class="fa fa-close alert-close"></i>
-    </vuestic-alert>
-
     <div class="row">
       <div class="col-md-4" v-for="item in cn_result.agent">
         <vuestic-widget class="chart-widget" :headerText="'Agent Profile'">
           <div class="d-flex justify-content-center align-items-center" style="margin-top: 30px">
-            <vuestic-profile-card :name=item.agent_name :location="'172.9.0.124'" photoSource="https://i.imgur.com/2CmhHsQ.png"
+            <vuestic-profile-card :name=item.agent_name  photoSource="https://i.imgur.com/2CmhHsQ.png"
                                   :social="{}">
             </vuestic-profile-card>
           </div>
-          <div class="d-flex justify-content-center align-items-center">
-            <button class="btn btn-primary btn-micro" v-on:click="edit_cn_agent(item)">
-              <span aria-hidden="true" class="fa fa-edit">{{'Edit'}}</span>
-            </button>
-            <pre>&#9;</pre>
-            <button class="btn btn-dark btn-micro" v-on:click="delete_agent(item,'cn')">
-              <span aria-hidden="true" class="fa fa-trash">{{'Delete'}}</span>
-            </button>
+          <div class="row">
+              <button class="col-md-6 btn btn-primary btn-micro" style="margin-top:7px;border-bottom-right-radius: 5px;border-top-right-radius: 5px;" v-on:click="edit_cn_agent(item)">
+                <span aria-hidden="true" class="fa fa-edit">{{'Edit'}}</span>
+              </button>
+              <button class="col-md-6 btn btn-dark btn-micro" style="margin-top:7px;border-bottom-left-radius: 5px;border-top-left-radius: 5px;" v-on:click="delete_agent(item,'cn')">
+                <span aria-hidden="true" class="fa fa-trash">{{'Dele'}}</span>
+              </button>
           </div>
         </vuestic-widget>
       </div>
       <div class="col-md-4" v-for="item in en_result.agent">
         <vuestic-widget class="chart-widget" :headerText="'Agent Profile'">
           <div class="d-flex justify-content-center align-items-center" style="margin-top: 30px">
-            <vuestic-profile-card :name=item.agent_name :location="'172.9.0.124'" photoSource="https://i.imgur.com/2CmhHsQ.png"
+            <vuestic-profile-card :name=item.agent_name photoSource="https://i.imgur.com/2CmhHsQ.png"
                                   :social="{}">
             </vuestic-profile-card>
           </div>
-          <div class="d-flex justify-content-center align-items-center">
-            <button class="btn btn-primary btn-micro" v-on:click="edit_en_agent(item)">
+          <div class="row">
+            <button class="col-md-6 btn btn-primary btn-micro" style="margin-top:7px;border-bottom-right-radius: 5px;border-top-right-radius: 5px;" v-on:click="edit_en_agent(item)">
               <span aria-hidden="true" class="fa fa-edit">{{'Edit'}}</span>
             </button>
-            <pre>&#9;</pre>
-            <button class="btn btn-dark btn-micro" v-on:click="delete_agent(item,'en')">
-              <span aria-hidden="true" class="fa fa-trash">{{'Delete'}}</span>
+            <button class="col-md-6 btn btn-dark btn-micro" style="margin-top:7px;border-bottom-left-radius: 5px;border-top-left-radius: 5px;" v-on:click="delete_agent(item,'en')">
+              <span aria-hidden="true" class="fa fa-trash">{{'Dele'}}</span>
             </button>
           </div>
         </vuestic-widget>
@@ -65,18 +56,18 @@
     data () {
       return {
         cn_result: {
-          system_id: 12312,
+          system_id: '12312',
           agent: []
         },
         en_result: {
-          system_id: 12312,
+          system_id: '12312',
           agent: []
         }
       }
     },
     mounted: function () {
       let _this = this
-      axios.post('/api/list_user_by_system_id', {'system_id': 12312}).then(function (res) {
+      axios.post('/api/list_user_by_system_id', {'system_id': '12312'}).then(function (res) {
         console.log(_this.cn_result)
         for (let key in res.data['result']) {
           console.log(res.data['result'][key])
@@ -85,15 +76,15 @@
       }, function (error) {
         console.log(error)
       })
-      axios.post('/api/list_user_by_system_id_en', {'system_id': 12312}).then(function (res) {
-        console.log(_this.en_result)
-        for (let key in res.data['result']) {
-          console.log(res.data['result'][key])
-          _this.en_result.agent.push(res.data['result'][key])
-        }
-      }, function (error) {
-        console.log(error)
-      })
+      // axios.post('/api/list_user_by_system_id_en', {'system_id': 12312}).then(function (res) {
+      //   console.log(_this.en_result)
+      //   for (let key in res.data['result']) {
+      //     console.log(res.data['result'][key])
+      //     _this.en_result.agent.push(res.data['result'][key])
+      //   }
+      // }, function (error) {
+      //   console.log(error)
+      // })
     },
     methods: {
       add_agent: function () {

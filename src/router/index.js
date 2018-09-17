@@ -77,6 +77,11 @@ export default new Router({
               component: lazyLoading('chatbot/agents/Modify_intent')
             },
             {
+              name: 'chat_widget',
+              path: 'chat_widget',
+              component: lazyLoading('chatbot/chat_widget/Chat_bubble')
+            },
+            {
               name: 'voice_kits',
               path: 'voice_kits',
               component: lazyLoading('chatbot/voice_kits/Voice_kits'),

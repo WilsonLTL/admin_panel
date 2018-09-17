@@ -3,8 +3,9 @@
     <div class="photo">
       <img :src="photoSource" />
     </div>
-    <h5 class="name">{{name}}</h5>
-    <span class="location"><span class="icon glyphicon glyphicon-map-marker"></span> {{location}}</span>
+    <h4 class="name">{{name}}</h4>
+    <!--<h6 class="name">Number of Intents:{{number_intent}}</h6>-->
+    <!--<span class="location"><span class="icon glyphicon glyphicon-map-marker"></span> {{location}}</span>-->
     <div class="social">
       <a class="icon brandico brandico-facebook-rect"
          v-if="social.facebook" :href="'http://' + social.facebook" target="_blank"></a>
@@ -19,7 +20,7 @@
 <script>
   export default {
     name: 'vuestic-profile-card',
-    props: ['photoSource', 'name', 'location', 'social']
+    props: ['photoSource', 'name', 'number_intent', 'social']
   }
 </script>
 

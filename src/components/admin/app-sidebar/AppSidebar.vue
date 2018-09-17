@@ -215,6 +215,27 @@
             <span>{{ $t('menu.voice_kits') }}</span>
           </span>
         </sidebar-link>
+        <sidebar-link
+          :to="{ name: 'chat_widget' }">
+          <span slot="title">
+            <span class="sidebar-menu-item-icon vuestic-icon fa fa-circle-o"></span>
+            <span>{{ $t('menu.chat_widget') }}</span>
+          </span>
+        </sidebar-link>
+        <sidebar-link
+          :to="{ name: 'chat_widget' }">
+          <span slot="title">
+            <span class="sidebar-menu-item-icon vuestic-icon fa fa-circle-o"></span>
+            <span>{{ $t('menu.sentiment_analysis') }}</span>
+          </span>
+        </sidebar-link>
+        <sidebar-link
+          :to="{ name: 'chat_widget' }">
+          <span slot="title">
+            <span class="sidebar-menu-item-icon vuestic-icon fa fa-circle-o"></span>
+            <span>{{ $t('menu.paragraph_classification') }}</span>
+          </span>
+        </sidebar-link>
       </sidebar-link-group>
       <sidebar-link-group>
         <span slot="title">

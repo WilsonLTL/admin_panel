@@ -105,17 +105,26 @@
       "disabled": "Disabled"
     },
     "inputs": {
+      "backgroundImage": "Background image url",
+      "background_color": "Background Color",
       "emailValidatedSuccess": "Email (validated with success)",
       "emailValidated": "Email (validated)",
       "inputWithIcon": "Input With Icon",
       "inputWithButton": "Input With Button",
       "inputWithClearButton": "Input With Clear Button",
       "inputWithRoundButton": "Input With Round Button",
+      "nav_header": "Chatbot Header",
+      "nav_header_color": "Header Color",
+      "nav_title_color": "Title Color",
+      "nav_border_color": "Header Border Color",
+      "send_button": "Send Button Url",
       "textInput": "Text Input",
       "textInputWithDescription": "Text Input (with description)",
       "textArea": "Text Area",
+      "textAreaColor": "Text Area Color",
       "title": "Inputs",
-      "upload": "UPLOAD"
+      "upload": "UPLOAD",
+      "widget_image": "Widget Image"
     },
     "mediumEditor": {
       "title": "Medium Editor"
@@ -192,7 +201,10 @@
     "vision": "Your vision",
     "user": "Your users",
     "vision_kit": "Your vision kits",
-    "setting": "Setting"
+    "setting": "Setting",
+    "sentiment_analysis": "Sentiment Analysis",
+    "paragraph_classification": "Paragraph Classification",
+    "chat_widget": "Chat Widget"
   },
   "messages": {
     "all": "See all messages",

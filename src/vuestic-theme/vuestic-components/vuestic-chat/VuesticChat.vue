@@ -1,11 +1,11 @@
 <template>
  <div class="vuestic-chat">
    <div class="chat-body" :style="{'height': height}" v-sticky-scroll="{animate: true, duration: 500}">
-     <div class="chat-message" v-for="message in value" :class="{'yours': message.yours, 'alien': !message.yours}">
+     <div class="chat-message" v-for="message in value.chatMessages" :class="{'yours': message.yours, 'alien': !message.yours}">
         {{message.text}}
      </div>
    </div>
-   <div class="chat-controls">
+   <div class="chat-controls" >
         <fieldset>
           <div class="form-group form-group-w-btn">
             <div class="input-group">
@@ -21,7 +21,7 @@
 
 <script>
   import StickyScroll from 'vuestic-directives/StickyScroll'
-
+  import axios from 'axios'
   export default {
     name: 'vuestic-chat',
 
@@ -33,13 +33,14 @@
         default: []
       },
       height: {
-        default: '20rem'
+        default: '30rem'
       }
     },
 
     data () {
       return {
-        inputMessage: ''
+        inputMessage: '',
+        rollback: ''
       }
     },
 
@@ -50,12 +51,79 @@
         }
       },
 
+      nlp (url, requestData) {
+        return Promise.resolve(
+          axios.post(url, requestData).then(function (res) {
+            let result = {
+              Speech: res.data['Speech'],
+              Score: res.data['Score'],
+              Intent: res.data['Intent']
+            }
+            if (result.Speech !== '') {
+              return result
+            } else {
+              result.Intent = '-'
+              result.Score = '-'
+              result.Speech = ''
+              res.data['Result'].forEach(function (e) {
+                if (e['Source'] > result.Score) {
+                  result.Intent = e['Intent']
+                  result.Score = e['Source']
+                  result.Speech = ''
+                }
+              })
+              return result
+            }
+          }, function (error) {
+            console.log(error)
+          })
+        )
+      },
+
       sendMessage () {
+        this.value.chatMessages.push({
+          text: this.inputMessage,
+          yours: true
+        })
         if (this.inputMessage) {
-          this.$emit('input', this.value.concat({
-            text: this.inputMessage,
-            yours: true
-          }))
+          console.log(this.value.lang)
+          let url = ''
+
+          if (this.value.lang === 'cn') {
+            console.log('cn')
+            url = '/api/sub_agent'
+            this.rollback = '抱歉,無法辨認'
+          } else {
+            console.log('en')
+            url = '/api/sub_agent_en'
+            this.rollback = "Sorry, can't detect"
+          }
+
+          //
+          let requestData = {
+            system_id: this.value.system_id,
+            agent_id: this.value.agent_id,
+            text: this.inputMessage
+          }
+          this.nlp(url, requestData).then((result) => {
+            if (result['Speech'] !== '') {
+              this.value.chatMessages.push({
+                text: result.Speech,
+                yours: false,
+              })
+              this.value.response.high_score_intent = result.Intent
+              this.value.response.responses = result.Speech
+              this.value.response.intent_score = result.Score
+            } else {
+              this.value.chatMessages.push({
+                text: this.rollback,
+                yours: false,
+              })
+              this.value.response.high_score_intent = result.Intent
+              this.value.response.responses = '-'
+              this.value.response.intent_score = result.Score
+            }
+          })
           this.inputMessage = ''
         }
       }
