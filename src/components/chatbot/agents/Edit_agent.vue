@@ -156,7 +156,8 @@
         console.log(error)
       })
 
-    },methods: {
+    },
+    methods: {
       delete_intent: function (row) {
         if (confirm('Are you sure to delete this intent?')) {
           let index = this.items.indexOf(row)
